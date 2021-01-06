@@ -9,7 +9,7 @@ var options = {
     'dir': __dirname,
     //'app-copyright': 'Logical Factory', // The human-readable copyright line for the app. Maps to the LegalCopyright metadata property on Windows, and NSHumanReadableCopyright on macOS.
     //'app-version': '0.0.6', // By default the version property in the package.json is used, but it can be overridden with this argument. If neither are provided, the version of Electron will be used. Maps to the ProductVersion metadata property on Windows, and CFBundleShortVersionString on macOS.
-    'asar': false,
+    'asar': true,
     'icon': './www/favicon.ico',
     //'name': '[Name]',
     'out': './build', // Gitignore this dir.
