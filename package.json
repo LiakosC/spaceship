@@ -1,23 +1,19 @@
 {
-  "name": "electron-quick-start",
+  "name": "backbone-electron",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
-  "main": "main.js",
+  "description": "",
+  "main": "window.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "node build.js"
   },
   "repository": "https://github.com/electron/electron-quick-start",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
-  ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "Ilias Apostolou",
+  "license": "ISC",
+  "dependencies": {},
   "devDependencies": {
-    "electron": "^11.1.1",
-    "electron-packager": "^15.2.0"
+    "electron": "^10.1.5",
+    "electron-packager": "^15.2.0",
+    "shelljs": "^0.8.4"
   }
 }
