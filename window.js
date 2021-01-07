@@ -2,11 +2,14 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 
+const FRAME_W = 18;
+const FRAME_H = 40;
+
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 800,
+    width: 700 + FRAME_W,
+    height: 600 + FRAME_H,
     frame: true,
     icon: path.resolve("./www/favicon.ico"),
     //title: "[Window]",
@@ -15,7 +18,9 @@ function createWindow () {
     //webPreferences: {
     //  nodeIntegration: true
     //}
-  })
+  });
+  
+  mainWindow.menuBarVisible = false; // Hides menu bar.
 
   // and load the index.html of the app.
   mainWindow.loadFile('./www/index.html')
