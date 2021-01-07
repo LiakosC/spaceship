@@ -2,16 +2,20 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 
-const FRAME_W = 18;
-const FRAME_H = 40;
+const FRAME_RESIZABLE_W = 18;
+const FRAME_RESIZABLE_H = 40;
+
+const FRAME_STATIC_W = 8;
+const FRAME_STATIC_H = 30;
 
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 700 + FRAME_W,
-    height: 600 + FRAME_H,
+    width: 700 + FRAME_STATIC_W,
+    height: 600 + FRAME_STATIC_H,
     frame: true,
     icon: path.resolve("./www/favicon.ico"),
+    resizable: false,
     //title: "[Window]",
     //simpleFullscreen: true,
     //fullscreenable: true,
