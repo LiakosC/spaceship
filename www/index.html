@@ -1,21 +1,150 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="include/css/game.css"/>
+		<link rel="stylesheet" type="text/css" href="include/css/animations.css"/>
+		
+		<script language="javascript" type="text/javascript" src="include/lib/jquery-3.2.1.min.js"></script>
+		<script language="javascript" type="text/javascript" src="include/lib/phaser-2.9.3.min.js"></script>
+		<script language="javascript" type="text/javascript" src="include/egui/egui.js"></script>
+		<script language="javascript" type="text/javascript" src="include/lib/FlexibleWindow.js"></script>
+		<script language="javascript" type="text/javascript" src="include/lib/Book.js"></script>
+		<script language="javascript" type="text/javascript" src="include/lib/g2.js"></script>
+		<script language="javascript" type="text/javascript" src="include/lib/PhaserMove4.js"></script>
+		<script language="javascript" type="text/javascript" src="include/lib/PhaserZoomCamera.js"></script>
+		
+		<script language="javascript" type="text/javascript" src="include/Group.js"></script>
+		<script language="javascript" type="text/javascript" src="include/Timer.js"></script>
+		<script language="javascript" type="text/javascript" src="include/Entity.js"></script>
+		<script language="javascript" type="text/javascript" src="include/Missile.js"></script>
+		<script language="javascript" type="text/javascript" src="include/Unit.js"></script>
+		<script language="javascript" type="text/javascript" src="include/UnitEnemy.js"></script>
+		<script language="javascript" type="text/javascript" src="include/UnitHero.js"></script>
+		<script language="javascript" type="text/javascript" src="include/Spell.js"></script>
+		<script language="javascript" type="text/javascript" src="include/AI.js"></script>
+		<script language="javascript" type="text/javascript" src="include/game.js"></script>
+		<script language="javascript" type="text/javascript" src="include/game.preload.js"></script>
+		<script language="javascript" type="text/javascript" src="include/game.update.js"></script>
+		<!script language="javascript" type="text/javascript" src="include/Missile.js"></script>
+		<!script language="javascript" type="text/javascript" src="include/data.js"></script>
 
-
-<!DOCTYPE html>
-<html lang="en_US">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self';">
-    <link rel="icon" href="favicon.ico">
-    <title>Title</title>
-    <link href="js/index.js" rel="preload" as="script">
-  </head>
-  <body>
-    <noscript>
-      <strong>Please enable <i>Javascript</i> it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <script type="text/javascript" src="js/index.js"></script>
-  </body>
+		<script language="javascript" type="text/javascript" src="include/sp/howler.min.js"></script>
+		<script language="javascript" type="text/javascript" src="include/sp/sp.js"></script>
+	</head>
+	<body>
+		Simple game with VERY deep code. Press F10 to toggle a flexible fullscreen. Levels can be added / extended. Units, missiles, spells too. Artificial Intelligence (AI) can be extended. Using Phaser.js for textures, Howler.js for sounds, g2.js for physics. Created but no longer maintained by Liakos1992.
+	</body>
 </html>
+
+<script language="javascript" type="text/javascript">
+egui.init("include/egui");
+egui.loadPlugin("EpicLoading");
+
+
+var win = new FlexibleWindow(null, 800, 600);
+win.element.style.cursor = "crosshair";
+
+var epicLoading = new egui.EpicLoading(win.element);
+epicLoading.title.innerHTML = "Infinity";
+epicLoading.subtitle.innerHTML = "";
+epicLoading.overbar.innerHTML = "Did you know? Firing can kill your enemies.";
+epicLoading.underbar.innerHTML = "Created and developed by Liakos.";
+
+var gameBox = $("<div>", {
+	id: "gameBox",
+	style: "position:absolute; left:0%; width:100%; top:0%; height:100%;"
+}).appendTo(win.element)[0];
+
+epicLoading.toggle(true);
+
+var ph = new Phaser.Game(800, 600, Phaser.CANVAS, "gameBox", {
+	preload: function() {
+		ph.load.onFileComplete.add(function() {
+			epicLoading.setProgress(ph.load.progress / 100);
+			if (epicLoading.progress == 1)
+				epicLoading.toggle(false);
+		});
+		game.preload();
+	},
+	create: function(ph) {
+		ph.canvas.addEventListener('contextmenu', function(ev) {ev.preventDefault();return false;}, false);
+		ph.stage.disableVisibilityChange = true;
+		ph.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT; //USER_SCALE
+		//ph.scale.fullScreenTarget = ph.canvas.parentNode; // no need
+		ph.stage.backgroundColor = '#6E12AA';
+		
+		ph.time.desiredFps = 40;
+		
+		ph.world.setBounds(0, 0, 800, 800);
+		
+		
+		game.start();
+		
+		new game.MenuWindow();
+	},
+	update: function(ph) {
+		game.update(ph.time.physicsElapsedMS);
+		if (game.phaserGroup_terrain != null)
+			game.phaserGroup_terrain.tilePosition.y += 1;
+	},
+	shutdown: function() {
+		game.clear();
+	}
+});
+
+
+
+var global = {};
+
+
+
+global.missions = {
+	1: {name: "Corrupted Earth", descr: "Bad guys have conquered our earth. Destroy them all.", stages: {
+		1: {name: "Human Technology", create: function() {
+			
+		}, waves: {
+				1: function() {
+					create.earth_aircraft(g.world.width/2, 300);
+				},
+				2: function() {
+					create.earth_aircraft(250, 300);
+					create.earth_aircraft(g.world.width-250, 300);
+				},
+				3: function() {
+					create.earth_aircraft(250, 300);
+					create.earth_aircraft(g.world.width-250, 300);
+					create.earth_aircraft(g.world.width/2, 250);
+				},
+				4: function() {
+					var a = function() {create.earth_aircraft(gaming.randomInt(250, g.world.width-250), gaming.randomInt(250, 400));}
+					g.time.events.add(0, a);
+					g.time.events.add(1000, a);
+					g.time.events.add(2000, a);
+					g.time.events.add(3000, a);
+					g.time.events.add(4000, a);
+					g.time.events.add(5000, a);
+					g.time.events.add(6000, a);
+					g.time.events.add(7000, a);
+					g.time.events.add(8000, a);
+					g.time.events.add(9000, a);
+					g.time.events.add(10000, a);
+				}
+			}		
+		},
+		2: {name: "Automatic", create:function() {
+		
+		}, waves: {
+			1: function() {},
+			2: function() {}
+		}}
+	}}
+}
+
+window.addEventListener("keydown", function(e) {
+	//console.log("KEY", e);
+	if (e.code == "F10") {
+		win.fullscreen();
+	}
+});
+
+
+</script>

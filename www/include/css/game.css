@@ -1,0 +1,57 @@
+body {
+	background-color: black;
+}
+div, table, span {
+	
+}
+button {
+	
+}
+
+#gameBox {
+	
+}
+#log {
+	
+}
+
+.menu {
+	position:absolute;
+	left:0px; top:0px; right:0px; bottom:0px;
+	width:20%;
+	height:30%;
+	padding:1%;
+	border:2px solid silver;
+	border-radius:5px;
+	background:#695656;
+	margin:auto;
+	user-select:none;
+}
+.menu div {
+	text-align:center;
+}
+.menu .title {
+	margin-bottom:5%;
+	font-weight:bold;
+	font-size:120%;
+	color:white;
+	text-shadow:1px 1px 0px black;
+}
+.menu button {
+	cursor:pointer;
+}
+.menu.main button {
+	width:23%;
+	height:20%;
+	font-size:150%;
+	font-weight:bold;
+	border:2px outset black;
+	border-radius:100px;
+	background:#847f86;
+}
+.menu button:hover {
+	background:#e4e4e4;
+}
+.menu button:active {
+	border-style:inset;
+}

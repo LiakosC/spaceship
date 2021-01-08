@@ -1,0 +1,60 @@
+.EpicLoading {
+	background-color:#d6d6ff;
+	position:relative;
+	width:100%;
+	height:100%;
+	pointer-events:none; 
+}
+
+.EpicLoading .title {
+	font-size:1200%;
+	font-weight:bold;
+	text-align:center;
+	color:white;
+	text-shadow:2px 2px 0px black;
+}
+.EpicLoading .subtitle {
+	font-size:200%;
+	font-weight:bold;
+	text-align:center;
+	color:white;
+	text-shadow:2px 2px 0px black;
+}
+.EpicLoading .overbar {
+	position:relative;
+	margin:100px auto 0px auto;
+	top:-30px;
+	font-size:150%;
+	text-align:center;
+	color:white;
+	text-shadow:1px 1px 0px black;
+	width:50%;
+	/*background:red;*/
+}
+
+.EpicLoading .bar {
+	position:relative;
+	margin:0px auto;
+	width:80%;
+	top:0px;
+	height:24px;;
+	background:#422626;
+	border:3px solid #0d0935;
+	border-radius:100px;
+}
+
+.EpicLoading .bar > div {
+	position:absolute;
+	left:0%;
+	top:0%;
+	height:100%;
+	background:#6c6cd6;
+	border-radius:inherit;
+}
+.EpicLoading .underbar {
+	margin-top:173px;
+	font-size:100%;
+	text-align:center;
+	color:white;
+	text-shadow:1px 1px 0px black;
+}

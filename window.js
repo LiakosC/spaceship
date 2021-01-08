@@ -11,7 +11,7 @@ const FRAME_STATIC_H = 30;
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 700 + FRAME_STATIC_W,
+    width: 800 + FRAME_STATIC_W,
     height: 600 + FRAME_STATIC_H,
     frame: true,
     icon: path.resolve("./www/favicon.ico"),
