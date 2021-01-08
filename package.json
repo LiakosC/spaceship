@@ -1,5 +1,5 @@
 {
-  "name": "backbone-electron",
+  "name": "spaceship",
   "version": "1.0.0",
   "description": "",
   "main": "window.js",
@@ -7,7 +7,7 @@
     "start": "electron .",
     "build": "node build.js"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "git@github.com:LiakosC/spaceship.git",
   "author": "Ilias Apostolou",
   "license": "ISC",
   "dependencies": {},
